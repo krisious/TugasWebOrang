@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TUGAS PERTEMUAN 6</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <!-- ============ SCROLLING TEXT =========== -->
+    <h2 style="color: #fcfcfc">
+      <marquee
+        behavior="scroll"
+        direction="left"
+        scrollamount="8"
+        bgcolor="#ff1493"
+        align="center"
+        >Tugas TP 6 - Khaliza Fania - 2110512020 - SI Kelas A</marquee
+      >
+    </h2>
+    <!-- ============ END SCROLLING =========== -->
+
+    <p id="heading">Isi Data Mahasiswa</p>
+
+    <div id="container">
+      <form id="input" name="formDataMhs" onsubmit="return formValidasi()">
+        <fieldset>
+          <label class="nim">
+            <p>
+              NIM:<span class="wajib">*</span>
+              <input
+                type="text"
+                id="nim"
+                class="text"
+                name="NIM"
+                minlength="10"
+                maxlength="10"
+              />
+            </p>
+          </label>
+
+          <label class="nama">
+            <p>
+              Nama:<span class="wajib">*</span>
+              <input type="text" id="nama" class="text" name="nama" />
+            </p>
+          </label>
+
+          <label class="jk">
+            <p>Jenis Kelamin:</p>
+            <div class="radio">
+              <label class="pria">
+                <input
+                  type="radio"
+                  name="jns_kelamin"
+                  value="Pria"
+                  id="jk_pria"
+                />
+                Pria
+              </label>
+
+              <label class="perempuan">
+                <input
+                  type="radio"
+                  name="jns_kelamin"
+                  value="Perempuan"
+                  id="jk_perempuan"
+                />
+                Perempuan
+              </label>
+            </div>
+          </label>
+
+          <!-- Atribut name harus menggunakan nama yang sama pada pilihan yang dibuat agar nantinya user hanya bisa memilih satu pilihan saja. 
+            
+            Atribut value digunakan untuk memberikan nilai pada masing – masing inputan yang di pilih
+          -->
+
+          <label class="tm">
+            <p>
+              Tahun Masuk:<span class="wajib">*</span>
+              <input
+                type="text"
+                id="thMasuk"
+                class="text"
+                name="tahunMasuk"
+                minlength="4"
+                maxlength="4"
+              />
+            </p>
+          </label>
+        </fieldset>
+
+        <div id="button">
+          <button
+            type="button"
+            name="tombol"
+            value="simpan"
+            onclick="formValidasi();"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Notes:
+    <span> element merupakan element inline (elemen yang tidak membentuk garis baru) yang digunakan untuk mengelompokkan beberapa element yang dimaksudkan untuk memudahkan dalam pemberian style (dengan CSS). 
+      
+    min-length & max-length digunakan untuk menentukan min dan max karakter yang harus diinputkan pada suatu form
+    -->
+  </body>
+</html>

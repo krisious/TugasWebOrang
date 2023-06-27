@@ -1,0 +1,115 @@
+<!-- window.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hasil Pemilihan Peminatan Mahasiswa</title>
+    <style></style>
+  </head>
+  <body>
+    <fieldset>
+      <center>
+        UPN Veteran Jakarta<img
+          src="https://www.upnvj.ac.id/id/files/thumb/d8be74d9d9ca67272c943c8d5dd739b5/520"
+          width="20px"
+          height="20px"
+        />
+      </center>
+      <legend>Peminatan Mahasiswa Ilmu Komputer</legend>
+      <p id="hasil"></p>
+
+      Peminatan yang di pilih:
+      <ul id="list_mk"></ul>
+    </fieldset>
+    <input
+      type="button"
+      value="Kembali"
+      style="float: right"
+      onclick="keluar()"
+    />
+
+    <script>
+      // Get the ID of the element from the URL query string
+      let urlParams = new URLSearchParams(window.location.search);
+      let nim = urlParams.get("nim");
+      let nama = urlParams.get("nama");
+      let angkatan = urlParams.get("angkatan");
+      let prodi = urlParams.get("prodi");
+      let mk = [urlParams.get("mk")];
+      const mkArray = mk.join(",").split(",");
+
+      //console.log(mkArray.length);
+
+      let tampung = [];
+
+      for (var i = 0; i < mkArray.length; i++) {
+        tampung.push(mkArray[i]);
+      }
+
+      //console.log(tampung);
+
+      const list_mk = document.getElementById("list_mk");
+      //menampilkan peminatan
+      tampung.forEach((item) => {
+        let li = document.createElement("li");
+        li.innerText = item;
+        list_mk.appendChild(li);
+      });
+
+      //metode untuk menghitung semester mahasiswa
+      class semester {
+        constructor(angkatan) {
+          this.angkatan = angkatan;
+        }
+
+        getSemester(thn_skrg) {
+          let semesterDuration = 6;
+          let semester = ((thn_skrg - angkatan) * 12) / semesterDuration;
+          //console.log(semester);
+          return semester;
+        }
+      }
+
+      let mySemester = new semester();
+      let date = new Date();
+      let year = date.getFullYear();
+
+      let element = document.getElementById("hasil");
+
+      //percabangan untuk membuat tampilan dari select option value agar menampilkan prodi sesuai yang di inginkan
+      var tampil_prodi = "";
+      if (prodi == "d3") {
+        tampil_prodi = "D3 Sistem Informasi";
+      } else if (prodi == "si") {
+        tampil_prodi = "S1 Sistem Informasi";
+      } else if (prodi == "if") {
+        tampil_prodi = "S1 Informatika";
+      }
+
+      if (element !== null) {
+        element.innerHTML =
+          "Nim : <b>" +
+          nim +
+          "</b>, <br/>Nama : <b>" +
+          nama +
+          "</b> </br>Program Studi: <b>" +
+          tampil_prodi +
+          "</b> <br/>Semester: <b>" +
+          mySemester.getSemester(year) +
+          "</b>";
+      }
+
+      //document.getElementById("hasil").innerHTML = "Nim anda: <b>" + nim +"</b>, Nama anda: <b>" + nama +"</b>, Jenis Kelamin anda: <b>" + jk +"</b>, Tahun Masuk Anda:"+ tahun +", dan anda berarti sekarang semester:"+mySemester.getSemester(year);
+
+      function keluar() {
+        let text =
+          "Anda Yakin Keluar\nPilih OK untuk keluar atau Cancel untuk tetap di Pop up.";
+        if (confirm(text) == true) {
+          window.opener = self;
+          window.close();
+        } else {
+          window.opener = self;
+        }
+      }
+    </script>
+  </body>
+</html>

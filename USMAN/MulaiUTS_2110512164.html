@@ -1,0 +1,231 @@
+<html>
+<head>
+	<title>MulaiUTS</title>
+	<style>
+		body {
+		  background: #456;
+		  font-family: 'Open Sans', sans-serif;
+		}
+		.login {
+		  width: 400px;
+		  margin: 16px auto;
+		  font-size: 16px;
+		}
+		/* Reset top and bottom margins from certain elements */
+		.login-header,
+		.login p {
+		  margin-top: 0;
+		  margin-bottom: 0;
+		}
+		.login-header {
+		  background: #28d;
+		  padding: 20px;
+		  font-size: 1.1em;
+		  font-weight: normal;
+		  text-align: center;
+		  text-transform: uppercase;
+		  color: #fff;
+		}
+		.login-container {
+		  background: #ebebeb;
+		  padding: 12px;
+		}
+		/* Every row inside .login-container is defined with p tags */
+		.login p {
+		  padding: 12px;
+		}
+		.login input {
+		  box-sizing: border-box;
+		  display: block;
+		  width: 100%;
+		  border-width: 1px;
+		  border-style: solid;
+		  padding: 16px;
+		  outline: 0;
+		  font-family: inherit;
+		  font-size: 0.95em;
+		}
+		.login input[id="nim"],
+		.login input[id="nama"],
+		.login input[id="angkatan"], 
+		.login input[id="prodi"]{
+		  background: #fff;
+		  border-color: #bbb;
+		  color: #555;
+		}
+		/* Text fields' focus effect */
+		.login input[id="nim"]:focus,
+		.login input[id="nama"]:focus,
+		.login input[id="angkatan"], 
+		.login input[id="prodi"]{
+		  border-color: #888;
+		}
+		.login input[type="button"] {
+		  background: #28d;
+		  border-color: transparent;
+		  color: #fff;
+		  cursor: pointer;
+		}
+		.login input[type="button"]:hover {
+		  background: #17c;
+		}
+		/* Buttons' focus effect */
+		.login input[type="button"]:focus {
+		  border-color: #05a;
+		}
+	</style>
+	<script type="text/javascript">
+		//fungsi untuk show select
+		function showPeminatan(select){
+		   if(select.value=="d3"){
+			document.getElementById('tampil_mk_d3').style.display = "block";
+			document.getElementById('tampil_mk_si').style.display = "none";
+			document.getElementById('tampil_mk_if').style.display = "none";
+		   }else if(select.value=="si"){
+			document.getElementById('tampil_mk_si').style.display = "block";
+			document.getElementById('tampil_mk_d3').style.display = "none";
+			document.getElementById('tampil_mk_if').style.display = "none";
+		   }else if(select.value=="if"){
+			document.getElementById('tampil_mk_if').style.display = "block";
+			document.getElementById('tampil_mk_d3').style.display = "none";
+			document.getElementById('tampil_mk_si').style.display = "none";
+		   }else{
+			document.getElementById('tampil_mk_d3').style.display = "none";
+			document.getElementById('tampil_mk_si').style.display = "none";
+			document.getElementById('tampil_mk_if').style.display = "none";
+		   }
+		} 
+		
+		function submit() {
+			
+			var nim = document.getElementById("nim");
+			var nama = document.getElementById("nama");
+			var angkatan = document.getElementById("angkatan");
+			var prodi = document.getElementById("prodi");
+			var mk = [];
+			var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+			for (var i = 0; i < checkboxes.length; i++) {
+			  mk.push(checkboxes[i].value);
+			}
+			
+			
+			var validasiAngka = /^[0-9]+$/;
+			var validasiHuruf = /^[a-zA-Z ]+$/;
+			
+			if(nim.value != "" && nama.value != "" && angkatan.value != "" && prodi.value != "" && mk != ""){
+				if(nim.value.match(validasiAngka)){
+					if(nama.value.match(validasiHuruf)){
+						if(angkatan.value.match(validasiAngka)){
+							alert("Pengisian Berhasil!");
+							
+							
+							let url= "RegistUTS_2110512164.html?nim="+nim.value+"&nama="+nama.value+"&angkatan="+angkatan.value+"&prodi="+prodi.value+"&mk="+mk;
+							
+							window.open(url, "_blank", "width=600,height=600");
+						}else{
+						  alert("Masukkan Tahun Angkatan Anda Salah!\nFormat wajib angka!");
+						  angkatan.value="";
+						  angkatan.focus();
+						  return false;
+						}
+						
+					}else{
+					  alert("Masukkan Nama Anda Salah!\nFormat wajib huruf!");
+					  nama.value="";
+					  nama.focus();
+					  return false;
+					}
+				}else{
+				  alert("Masukkan nim Anda Salah!\nFormat wajib angka!");
+				  nim.value="";
+				  nim.focus();
+				  return false;
+				}
+				
+			}else{
+			  alert("Masukkan Kosong! Mohon Isi Terlebih dahulu inputan");
+			  nim.value="";
+			  nama.value="";
+			  angkatan.value="";
+			  prodi.value="";
+			  mk.value="";
+			  nim.focus();
+			  return false;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="login">
+		<h2 class="login-header">
+			Form Peminatan Mahasiswa Ilmu Komputer UPN Veteran Jakarta
+			<img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/ed/Logo_UPNVJ.png/270px-Logo_UPNVJ.png" width="20px" height="20px"/>
+		</h2>
+		
+		
+		<div class="login-container">
+			<p>
+				<input type="text" id="nim" placeholder="NIM Mahasiswa">
+			</p>
+			<p>
+				<input text="text" id="nama" placeholder="Nama Mahasiswa">
+			</p>
+			<p>
+				<input text="text" id="angkatan" placeholder="Angkatan Mahasiswa">
+			</p>
+			<p>
+			  <label for="prodi">Pilih Program Studi:</label>
+			  <select name="prodi" id="prodi" onchange="showPeminatan(this)">
+				<option value="">Pilih Program Studi</option>
+				<option value="d3">D3 Sistem Informasi</option>
+				<option value="si">S1 Sistem Informasi</option>
+				<option value="if">S1 Informatika</option>
+			  </select>
+			</p>
+			<fieldset id="tampil_mk_d3" style="display:none;">
+			  <legend>Peminatan Mahasiswa D3 Sistem Informasi</legend>
+				<table>
+					<tr>
+						<td><label for="mp">Mobile Programmer</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Mobile Programmer" /></td>
+					</tr>
+					<tr>
+						<td><label for="wd">Web Developer</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Web Developer" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset id="tampil_mk_si" style="display:none;">
+			  <legend>Peminatan Mahasiswa S1 Sistem Informasi</legend>
+				<table>					
+					<tr>
+						<td><label for="wd">Web Developer</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Web Developer" /></td>
+					</tr>
+					<tr>
+						<td><label for="da">Database Administrator</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Database Administrator" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset id="tampil_mk_if" style="display:none;">
+			  <legend>Peminatan Mahasiswa S1 Informatika</legend>
+				<table>
+					<tr>
+						<td><label for="se">Software Enginer</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Software Enginer" /></td>
+					</tr>
+					<tr>
+						<td><label for="fp">Fullstack Programmer</label></td>
+						<td><input type="checkbox" id="mk" name="mk" value="Fullstack Programmer" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<p>
+				<input type="button" value="Submit" onclick="submit();">
+			</p>
+		</div>
+	</div>
+</body>
+</html>

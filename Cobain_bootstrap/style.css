@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+body {
+  height: 100vh;
+}
+
+.container,
+.row {
+  height: 100vh;
+}
+
+.heading-form{
+    margin-top: 35%;
+}

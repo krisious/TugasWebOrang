@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Hasil input</title>
+  </head>
+  <body>
+    <h2>Data Mahasiswa</h2>
+    <p id="hasil"></p>
+
+    <script>
+      window.addEventListener("message", function (event) {
+        if (event.origin !== window.location.origin) {
+          return;
+        }
+
+        var hasil = event.data;
+        document.getElementById("hasil").innerHTML = hasil;
+      });
+
+      //   window.addEventListener("message", function (event) {
+      //     if (event.origin !== window.location.origin) {
+      //       return;
+      //     }
+
+      //   var hasil = event.date;
+      //     document.getElementById("hasil").innerHTML = hasil;
+      //   });
+    </script>
+
+    <a href="javascript: window.close()">Tutup Window[X]</a>
+  </body>
+</html>

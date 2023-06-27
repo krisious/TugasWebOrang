@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Hasil Submit Data</title>
+  </head>
+
+  <body>
+    <h2>Data Mahasiswa</h2>
+    <p id="result"></p>
+
+    <script>
+      window.addEventListener("message", function (event) {
+        if (event.origin !== window.location.origin) {
+          return;
+        }
+
+        var result = event.data;
+        document.getElementById("result").innerHTML = result;
+      });
+    </script>
+
+    <a href="javascript:window.close();">Tutup Window [X]</a>
+  </body>
+</html>

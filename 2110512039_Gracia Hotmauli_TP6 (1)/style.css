@@ -1,0 +1,7 @@
+h1 {
+    font-weight: 100;
+    font-size: 20pt;
+    margin-bottom: 40px;
+}
+
+.required { color: red; }
